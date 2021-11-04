@@ -5,6 +5,7 @@ const {
   getContactById,
   addContact,
   removeContact,
+  updateContact,
 } = require("../../model/index");
 
 router.get("/", async (req, res, next) => {
@@ -48,7 +49,15 @@ router.delete("/:contactId", async (req, res, next) => {
 });
 
 router.patch("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
+  const id = await parseInt(req.params.contactId);
+  const bodyContact = await req.body;
+  console.log(Object.keys(bodyContact).length);
+  if (Object.keys(bodyContact).length === 0) {
+    res.status(400).json({ message: "missing fields" });
+  } else {
+    const newContact = await updateContact(id, bodyContact);
+    res.status(200).json(newContact);
+  }
 });
 
 module.exports = router;

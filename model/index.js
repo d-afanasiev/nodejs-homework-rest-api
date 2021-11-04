@@ -45,7 +45,23 @@ const addContact = async (body) => {
   return contact;
 };
 
-const updateContact = async (contactId, body) => {};
+const updateContact = async (contactId, body) => {
+  const changeContact = await contacts.reduce((previousValue, element) => {
+    if (element.id === contactId) {
+      const newElement = { ...element, ...body };
+      return [...previousValue, newElement];
+    }
+    return [...previousValue, element];
+  }, []);
+  fs.writeFile(
+    `${contactsPath}/model/contacts.json`,
+    JSON.stringify(changeContact),
+    (err) => {
+      if (err) throw err;
+    }
+  );
+  return changeContact;
+};
 
 module.exports = {
   listContacts,
