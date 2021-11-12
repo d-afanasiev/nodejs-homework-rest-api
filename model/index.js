@@ -46,13 +46,12 @@ const addContact = async (body) => {
 };
 
 const updateContact = async (contactId, body) => {
-  const changeContact = await contacts.reduce((previousValue, element) => {
+  const changeContact = await contacts.map((element) => {
     if (element.id === contactId) {
-      const newElement = { ...element, ...body };
-      return [...previousValue, newElement];
+      element = { ...element, ...body };
     }
-    return [...previousValue, element];
-  }, []);
+    return element;
+  });
   fs.writeFile(
     `${contactsPath}/model/contacts.json`,
     JSON.stringify(changeContact),
