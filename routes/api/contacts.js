@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const {
+  addContactValidation,
+} = require("../../middlewares/validationMidleware");
+
+const {
   listContacts,
   getContactById,
   addContact,
@@ -24,18 +28,9 @@ router.get("/:contactId", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
-  const newContact = await req.body;
-  if (
-    newContact.name === "" ||
-    newContact.email === "" ||
-    newContact.phone === ""
-  ) {
-    res.status(400).json({ message: "missing required name field" });
-  } else {
-    const writeContact = await addContact(newContact);
-    res.status(201).json(writeContact);
-  }
+router.post("/", addContactValidation, async (req, res, next) => {
+  const writeContact = await addContact(req.body);
+  res.status(201).json(writeContact);
 });
 
 router.delete("/:contactId", async (req, res, next) => {
@@ -48,10 +43,10 @@ router.delete("/:contactId", async (req, res, next) => {
   }
 });
 
-router.patch("/:contactId", async (req, res, next) => {
+router.put("/:contactId", async (req, res, next) => {
   const id = await parseInt(req.params.contactId);
   const bodyContact = await req.body;
-  console.log(Object.keys(bodyContact).length);
+  // console.log(Object.keys(bodyContact).length);
   if (Object.keys(bodyContact).length === 0) {
     res.status(400).json({ message: "missing fields" });
   } else {
