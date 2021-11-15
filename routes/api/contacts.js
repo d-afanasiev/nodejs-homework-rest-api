@@ -23,9 +23,8 @@ router.get("/:contactId", async (req, res, next) => {
   const contact = await getContactById(id);
   if (!contact) {
     return res.status(404).json({ message: "Not found" });
-  } else {
-    return res.status(200).json(contact);
   }
+  return res.status(200).json(contact);
 });
 
 router.post("/", addContactValidation, async (req, res, next) => {
@@ -38,21 +37,19 @@ router.delete("/:contactId", async (req, res, next) => {
   const deleteContact = await removeContact(id);
   if (!deleteContact) {
     return res.status(404).json({ message: "Not found" });
-  } else {
-    return res.status(200).json(deleteContact);
   }
+  return res.status(200).json(deleteContact);
 });
 
-router.put("/:contactId", async (req, res, next) => {
+router.put("/:contactId", patchContactValidation, async (req, res, next) => {
   const id = await parseInt(req.params.contactId);
   const bodyContact = await req.body;
   // console.log(Object.keys(bodyContact).length);
   if (Object.keys(bodyContact).length === 0) {
     return res.status(400).json({ message: "missing fields" });
-  } else {
-    const newContact = await updateContact(id, bodyContact);
-    return res.status(200).json(newContact);
   }
+  const newContact = await updateContact(id, bodyContact);
+  return res.status(200).json(newContact);
 });
 
 module.exports = router;

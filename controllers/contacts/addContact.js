@@ -8,7 +8,7 @@ const contactsPath = path.resolve("");
 const addContact = async (body) => {
   const currentContact = { id: uuidv4(), ...body };
   const contact = [...contacts, currentContact];
-  fs.writeFile(
+  await fs.writeFile(
     `${contactsPath}/model/contacts.json`,
     JSON.stringify(contact),
     (err) => {

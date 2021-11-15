@@ -5,13 +5,13 @@ const path = require("path");
 const contactsPath = path.resolve("");
 
 const updateContact = async (contactId, body) => {
-  const changeContact = await contacts.map((element) => {
+  const changeContact = contacts.map((element) => {
     if (element.id === contactId) {
       element = { ...element, ...body };
     }
     return element;
   });
-  fs.writeFile(
+  await fs.writeFile(
     `${contactsPath}/model/contacts.json`,
     JSON.stringify(changeContact),
     (err) => {
