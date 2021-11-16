@@ -15,7 +15,7 @@ const addContact = async (body) => {
       if (err) throw err;
     }
   );
-  return contact;
+  return currentContact;
 };
 
 module.exports = addContact;
