@@ -1,24 +1,12 @@
-const fs = require("fs/promises");
-const contacts = require("../../db/contacts.json");
-const path = require("path");
-
-const contactsPath = path.resolve("");
+const { Contacts } = require("../../db/contactModel");
 
 const removeContact = async (contactId) => {
-  const findContact = contacts.find(({ id }) => id === contactId);
-  if (!findContact) {
-    return false;
+  try {
+    const deleteContact = await Contacts.findByIdAndRemove(contactId);
+    return deleteContact;
+  } catch (error) {
+    return null;
   }
-
-  const filterContact = contacts.filter(({ id }) => contactId !== id);
-  await fs.writeFile(
-    `${contactsPath}/db/contacts.json`,
-    JSON.stringify(filterContact),
-    (err) => {
-      if (err) throw err;
-    }
-  );
-  return filterContact;
 };
 
 module.exports = removeContact;

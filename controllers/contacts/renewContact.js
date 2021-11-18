@@ -1,7 +1,7 @@
 const { updateContact } = require("../../models/contacts");
 
 const renewContact = async (req, res, next) => {
-  const id = parseInt(req.params.contactId);
+  const id = req.params.contactId;
   const bodyContact = req.body;
 
   if (Object.keys(bodyContact).length === 0) {

@@ -1,8 +1,12 @@
-const contacts = require("../../db/contacts.json");
+const { Contacts } = require("../../db/contactModel");
 
 const getContactById = async (contactId) => {
-  const searchContact = contacts.find(({ id }) => id === contactId);
-  return searchContact;
+  try {
+    const searchContact = await Contacts.findById(contactId);
+    return searchContact;
+  } catch (error) {
+    return null;
+  }
 };
 
 module.exports = getContactById;

@@ -1,21 +1,13 @@
-const fs = require("fs/promises");
-const contacts = require("../../db/contacts.json");
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
-
-const contactsPath = path.resolve("");
+const { Contacts } = require("../../db/contactModel");
 
 const addContact = async (body) => {
-  const currentContact = { id: uuidv4(), ...body };
-  const contact = [...contacts, currentContact];
-  await fs.writeFile(
-    `${contactsPath}/db/contacts.json`,
-    JSON.stringify(contact),
-    (err) => {
-      if (err) throw err;
-    }
-  );
-  return currentContact;
+  try {
+    const contact = new Contacts({ ...body });
+    await contact.save();
+    return contact;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 module.exports = addContact;

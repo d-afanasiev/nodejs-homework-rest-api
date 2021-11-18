@@ -14,6 +14,7 @@ module.exports = {
         .length(10)
         .pattern(/^[0-9]+$/)
         .required(),
+      favorite: Joi.boolean().required(),
     });
 
     const validationResult = await schema.validate(req.body);
@@ -35,6 +36,7 @@ module.exports = {
       phone: Joi.string()
         .length(10)
         .pattern(/^[0-9]+$/),
+      favorite: Joi.boolean(),
     });
 
     const validationResult = await schema.validate(req.body);
