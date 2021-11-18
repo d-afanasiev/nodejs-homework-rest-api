@@ -1,9 +1,9 @@
 const { Contacts } = require("../../db/contactModel");
 
-const updateContact = async (contactId, body) => {
+const updateStatusContact = async (contactId, { favorite }) => {
   try {
     const updateContact = await Contacts.findByIdAndUpdate(contactId, {
-      $set: { ...body },
+      $set: { favorite },
     });
     return updateContact;
   } catch (error) {
@@ -11,4 +11,4 @@ const updateContact = async (contactId, body) => {
   }
 };
 
-module.exports = updateContact;
+module.exports = updateStatusContact;
