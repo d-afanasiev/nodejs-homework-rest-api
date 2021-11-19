@@ -5,7 +5,7 @@ const renewFavoriteContact = async (req, res, next) => {
   const bodyContact = req.body;
 
   if (Object.keys(bodyContact).length === 0) {
-    return res.status(400).json({ message: "missing fields" });
+    return res.status(400).json({ message: "missing field favorite" });
   }
   const newContact = await updateStatusContact(id, bodyContact);
 

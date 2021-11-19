@@ -2,10 +2,11 @@ const { Contacts } = require("../../db/contactModel");
 
 const updateStatusContact = async (contactId, { favorite }) => {
   try {
-    const updateContact = await Contacts.findByIdAndUpdate(contactId, {
+    await Contacts.findByIdAndUpdate(contactId, {
       $set: { favorite },
     });
-    return updateContact;
+    const getContactById = await Contacts.findById(contactId);
+    return getContactById;
   } catch (error) {
     return null;
   }
