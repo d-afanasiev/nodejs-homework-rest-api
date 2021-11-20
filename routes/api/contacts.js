@@ -7,7 +7,7 @@ const {
 } = require("../../middlewares/validationMidleware");
 
 const {
-  getListContacts,
+  getListContactsControllers,
   getContact,
   addContactToFile,
   deleteContact,
@@ -15,7 +15,7 @@ const {
   renewStatusContact,
 } = require("../../controllers/contacts");
 
-router.get("/", getListContacts);
+router.get("/", getListContactsControllers);
 
 router.get("/:contactId", getContact);
 

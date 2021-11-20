@@ -1,8 +1,8 @@
-const { listContacts } = require("../../models/contacts");
+const { getListContacts } = require("../../models/contacts");
 
-const getListContacts = async (req, res, next) => {
-  const contacts = await listContacts();
+const getListContactsControllers = async (req, res, next) => {
+  const contacts = await getListContacts();
   return res.status(200).json(contacts);
 };
 
-module.exports = getListContacts;
+module.exports = getListContactsControllers;
