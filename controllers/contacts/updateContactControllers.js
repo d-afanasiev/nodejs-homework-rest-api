@@ -4,6 +4,10 @@ const updateContactControllers = async (req, res, next) => {
   const id = req.params.contactId;
   const bodyContact = req.body;
 
+  if (Object.keys(bodyContact).length === 0) {
+    return res.status(400).json({ message: "missing fields" });
+  }
+
   const newContact = await updateContact(id, bodyContact);
 
   return res.status(200).json(newContact);
