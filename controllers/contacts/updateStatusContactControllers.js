@@ -1,6 +1,6 @@
 const { updateStatusContact } = require("../../models/contacts");
 
-const renewFavoriteContact = async (req, res, next) => {
+const updateStatusContactControllers = async (req, res, next) => {
   const id = req.params.contactId;
   const bodyContact = req.body;
 
@@ -9,4 +9,4 @@ const renewFavoriteContact = async (req, res, next) => {
   return res.status(200).json(newContact);
 };
 
-module.exports = renewFavoriteContact;
+module.exports = updateStatusContactControllers;

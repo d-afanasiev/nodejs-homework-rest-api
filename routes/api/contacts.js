@@ -5,31 +5,35 @@ const { schema } = require("../../schemas");
 
 const {
   getListContactsControllers,
-  getContact,
-  addContactToFile,
-  deleteContact,
-  renewContact,
-  renewStatusContact,
+  getContactByIdController,
+  addContactController,
+  deleteContactController,
+  updateContactControllers,
+  updateStatusContactControllers,
 } = require("../../controllers/contacts");
 
 router.get("/", ctrlWrapper(getListContactsControllers));
 
-router.get("/:contactId", ctrlWrapper(getContact));
+router.get("/:contactId", ctrlWrapper(getContactByIdController));
 
-router.post("/", validation(schema.addSchema), ctrlWrapper(addContactToFile));
+router.post(
+  "/",
+  validation(schema.addSchema),
+  ctrlWrapper(addContactController)
+);
 
-router.delete("/:contactId", ctrlWrapper(deleteContact));
+router.delete("/:contactId", ctrlWrapper(deleteContactController));
 
 router.put(
   "/:contactId",
   validation(schema.putSchema),
-  ctrlWrapper(renewContact)
+  ctrlWrapper(updateContactControllers)
 );
 
 router.patch(
   "/:contactId/favorite",
   validation(schema.patchSchema),
-  ctrlWrapper(renewStatusContact)
+  ctrlWrapper(updateStatusContactControllers)
 );
 
 module.exports = router;
