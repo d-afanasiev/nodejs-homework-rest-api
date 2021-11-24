@@ -1,10 +1,11 @@
 const { Contacts } = require("../../db/contactModel");
 
 const updateContact = async (contactId, body) => {
-  await Contacts.findByIdAndUpdate(contactId, {
-    $set: { ...body },
-  });
-  const getContactById = await Contacts.findById(contactId);
+  const getContactById = await Contacts.findByIdAndUpdate(
+    contactId,
+    { ...body },
+    { new: true }
+  );
   return getContactById;
 };
 
