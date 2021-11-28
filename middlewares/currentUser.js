@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../db/authModel");
 
-const authMiddlewares = async (req, res, next) => {
+const currentUserMiddlewares = async (req, res, next) => {
   try {
     const [tokenType, token] = req.headers["authorization"].split(" ");
 
@@ -19,18 +19,18 @@ const authMiddlewares = async (req, res, next) => {
 
     const user = jwt.decode(token, process.env.JWT_SECRET);
 
-    const validUser = await User.find({ _id: user._id, token });
+    const validUser = await User.find({ _id: user._id });
     if (validUser.length === 0) {
       const error = new Error("Not authorized");
       error.status = 401;
       next(error);
     }
 
-    req.user = user;
+    req.user = validUser;
     next();
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = authMiddlewares;
+module.exports = currentUserMiddlewares;
