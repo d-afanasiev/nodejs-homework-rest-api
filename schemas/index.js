@@ -1,3 +1,4 @@
 const schema = require("./contacts");
+const auth = require("./auth");
 
-module.exports = { schema };
+module.exports = { schema, auth };
