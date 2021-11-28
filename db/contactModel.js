@@ -16,6 +16,13 @@ const contactSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  userId: {
+    type: String,
+  },
+  owner: {
+    type: mongoose.ObjectId,
+    ref: "User",
+  },
 });
 
 const Contacts = mongoose.model("Contact", contactSchema);

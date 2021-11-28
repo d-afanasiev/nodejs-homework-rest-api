@@ -20,10 +20,6 @@ const authSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  owner: {
-    type: mongoose.ObjectId,
-    ref: "user",
-  },
 });
 
 authSchema.methods.setPassword = function (password) {

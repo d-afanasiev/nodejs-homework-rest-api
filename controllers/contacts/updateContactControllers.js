@@ -1,6 +1,7 @@
 const { updateContact } = require("../../models/contacts");
 
 const updateContactControllers = async (req, res, next) => {
+  const { _id } = req.user;
   const id = req.params.contactId;
   const bodyContact = req.body;
 
@@ -8,7 +9,7 @@ const updateContactControllers = async (req, res, next) => {
     return res.status(400).json({ message: "missing fields" });
   }
 
-  const newContact = await updateContact(id, bodyContact);
+  const newContact = await updateContact(id, bodyContact, _id);
 
   return res.status(200).json(newContact);
 };

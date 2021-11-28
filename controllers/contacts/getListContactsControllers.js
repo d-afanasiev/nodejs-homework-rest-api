@@ -1,8 +1,8 @@
 const { getListContacts } = require("../../models/contacts");
 
 const getListContactsControllers = async (req, res, next) => {
-  console.log({ token: req.token, user: req.user });
-  const contacts = await getListContacts();
+  const { _id } = req.user;
+  const contacts = await getListContacts(_id);
   return res.status(200).json(contacts);
 };
 
