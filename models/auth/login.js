@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { Unauthorized } = require("http-errors");
 const { User } = require("../../db/authModel");
 
 const login = async (body) => {
@@ -6,9 +7,7 @@ const login = async (body) => {
   const user = await User.findOne({ email });
 
   if (!(await user.validPassword(password))) {
-    const error = new Error("Email or password is wrong");
-    error.status = 401;
-    throw error;
+    throw new Unauthorized("Email or password is wrong");
   }
 
   const token = jwt.sign(

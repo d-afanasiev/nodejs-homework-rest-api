@@ -1,33 +1,32 @@
 const jwt = require("jsonwebtoken");
+const { Unauthorized } = require("http-errors");
 const { User } = require("../db/authModel");
 
 const authMiddlewares = async (req, res, next) => {
   try {
-    const [tokenType, token] = req.headers["authorization"].split(" ");
-
-    if (tokenType !== "Bearer") {
+    if (!req.headers.authorization) {
       next(
-        new Error("Please, provide a token in request authorization header")
+        new Unauthorized(
+          "Please, provide a token in request authorization header"
+        )
       );
+    } else {
+      const [tokenType, token] = req.headers["authorization"].split(" ");
+
+      if (!token) {
+        next(new Unauthorized("Please, provide a token"));
+      }
+
+      const user = jwt.decode(token, process.env.JWT_SECRET);
+
+      const validUser = await User.find({ _id: user._id, token });
+      if (validUser.length === 0) {
+        next(new Unauthorized("Not authorized"));
+      }
+
+      req.user = user;
+      next();
     }
-
-    if (!token) {
-      const error = new Error("Please, provide a token");
-      error.status = 401;
-      next(error);
-    }
-
-    const user = jwt.decode(token, process.env.JWT_SECRET);
-
-    const validUser = await User.find({ _id: user._id, token });
-    if (validUser.length === 0) {
-      const error = new Error("Not authorized");
-      error.status = 401;
-      next(error);
-    }
-
-    req.user = user;
-    next();
   } catch (err) {
     next(err);
   }
