@@ -6,14 +6,21 @@ const {
   logoutMiddlewares,
   currentUserMiddlewares,
 } = require("../../middlewares");
-const { auth } = require("../../schemas");
+const { auth, schemaSubscription } = require("../../schemas");
 
 const {
   registrationController,
   loginController,
   logoutController,
   currentUserController,
+  updateSubscriptionController,
 } = require("../../controllers/auth");
+
+router.patch(
+  "/:contactId",
+  validation(schemaSubscription),
+  updateSubscriptionController
+);
 
 router.post(
   "/signup",
