@@ -3,8 +3,7 @@ const router = express.Router();
 const {
   ctrlWrapper,
   validation,
-  logoutMiddlewares,
-  currentUserMiddlewares,
+  authMiddlewares,
 } = require("../../middlewares");
 const { auth, schemaSubscription } = require("../../schemas");
 
@@ -30,8 +29,8 @@ router.post(
 
 router.post("/login", validation(auth.schema), ctrlWrapper(loginController));
 
-router.post("/logout", logoutMiddlewares, logoutController);
+router.post("/logout", authMiddlewares, logoutController);
 
-router.post("/current", currentUserMiddlewares, currentUserController);
+router.get("/current", authMiddlewares, currentUserController);
 
 module.exports = router;

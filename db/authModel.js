@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 const bCrypt = require("bcryptjs");
 
-const authSchema = new mongoose.Schema({
+const authSchema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
@@ -30,6 +30,6 @@ authSchema.methods.validPassword = function (password) {
   return bCrypt.compareSync(password, this.password);
 };
 
-const User = mongoose.model("User", authSchema);
+const User = model("User", authSchema);
 
 module.exports = { User };

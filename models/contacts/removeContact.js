@@ -1,10 +1,10 @@
 const { Contacts } = require("../../db/contactModel");
 
-const removeContact = async (contactId, userId) => {
+const removeContact = async (contactId, owner) => {
   try {
     const deleteContact = await Contacts.findOneAndRemove({
       _id: contactId,
-      userId,
+      owner,
     });
     return deleteContact;
   } catch (error) {

@@ -1,12 +1,16 @@
 const jwt = require("jsonwebtoken");
-const { Unauthorized } = require("http-errors");
+const { Unauthorized, Conflict } = require("http-errors");
 const { User } = require("../../db/authModel");
 
 const login = async (body) => {
-  const { password, email, subscription } = body;
+  const { password, email } = body;
   const user = await User.findOne({ email });
 
-  if (!(await user.validPassword(password))) {
+  if (user) {
+    throw new Conflict("Email in use");
+  }
+
+  if (!user || !(await user.validPassword(password))) {
     throw new Unauthorized("Email or password is wrong");
   }
 
