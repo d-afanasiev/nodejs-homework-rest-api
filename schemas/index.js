@@ -1,3 +1,5 @@
 const schema = require("./contacts");
+const auth = require("./auth");
+const schemaSubscription = require("./updateSubscription");
 
-module.exports = { schema };
+module.exports = { schema, auth, schemaSubscription };

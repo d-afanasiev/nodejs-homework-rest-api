@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { ctrlWrapper, validation } = require("../../middlewares");
+const {
+  ctrlWrapper,
+  validation,
+  authMiddlewares,
+} = require("../../middlewares");
 const { schema } = require("../../schemas");
 
 const {
@@ -11,6 +15,8 @@ const {
   updateContactControllers,
   updateStatusContactControllers,
 } = require("../../controllers/contacts");
+
+router.use("/", authMiddlewares);
 
 router.get("/", ctrlWrapper(getListContactsControllers));
 
