@@ -6,8 +6,8 @@ const login = async (body) => {
   const { password, email } = body;
   const user = await User.findOne({ email });
 
-  if (user) {
-    throw new Conflict("Email in use");
+  if (!user) {
+    throw new Conflict("Email not use");
   }
 
   if (!user || !(await user.validPassword(password))) {
