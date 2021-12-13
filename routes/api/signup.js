@@ -7,7 +7,7 @@ const {
   authMiddlewares,
   uploadMiddleware,
 } = require("../../middlewares");
-const { auth, schemaSubscription } = require("../../schemas");
+const { auth, schemaSubscription, verify } = require("../../schemas");
 
 const {
   registrationController,
@@ -16,6 +16,8 @@ const {
   currentUserController,
   updateSubscriptionController,
   avatarController,
+  verificationTokenController,
+  verifyEmailController,
 } = require("../../controllers/auth");
 
 router.patch(
@@ -35,6 +37,17 @@ router.post("/login", validation(auth.schema), ctrlWrapper(loginController));
 router.post("/logout", authMiddlewares, logoutController);
 
 router.get("/current", authMiddlewares, currentUserController);
+
+router.get(
+  "/verify/:verificationToken",
+  ctrlWrapper(verificationTokenController)
+);
+
+router.post(
+  "/verify",
+  validation(verify.email),
+  ctrlWrapper(verifyEmailController)
+);
 
 router.patch(
   "/avatars/:contactId",
