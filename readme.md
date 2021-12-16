@@ -198,6 +198,10 @@ RequestBody: {
   "password": "examplepassword"
 }
 
+```
+
+```shell
+
 # Успешный ответ
 Status: 201 Created
 Content-Type: application/json
@@ -230,6 +234,10 @@ RequestBody: {
   "email": "example@example.com",
   "password": "examplepassword"
 }
+
+```
+
+```shell
 
 # Успешный ответ
 Status: 200 OK
@@ -312,6 +320,10 @@ RequestBody: {
   "avatarURL": загруженный файл
 }
 
+```
+
+```shell
+
 # Успешный ответ
 Status: 200 OK
 Content-Type: application/json
@@ -341,6 +353,10 @@ RequestBody: {
   "avatarURL": загруженный файл
 }
 
+```
+
+```shell
+
 # Успешный ответ
 Status: 200 OK
 ResponseBody: {
@@ -363,6 +379,10 @@ Content-Type: application/json
 RequestBody: {
   "email": "example@example.com"
 }
+
+```
+
+```shell
 
 # Успешный ответ
 Status: 200 Ok
