@@ -64,7 +64,7 @@ RequestBody: {
 ```shell
 
 # Успешный ответ
-Status: 201 OK
+Status: 201 Created
 Content-Type: application/json
 ResponseBody: {
   Возвращает массив всех контактов
@@ -190,17 +190,199 @@ ResponseBody: {
 
 #### POST /users/signup - Зарегистрировать пользователя.
 
+```shell
+
+Content-Type: application/json
+RequestBody: {
+  "email": "example@example.com",
+  "password": "examplepassword"
+}
+
+# Успешный ответ
+Status: 201 Created
+Content-Type: application/json
+ResponseBody: {
+  "user": {
+    "email": "example@example.com",
+    "subscription": "starter"
+  }
+}
+
+# Неуспешный ответ
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+
+Status: 409 Conflict
+Content-Type: application/json
+ResponseBody: {
+  "message": "Email in use"
+}
+
+```
+
 #### POST /users/login - Залогинить пользователя.
+
+```shell
+
+Content-Type: application/json
+RequestBody: {
+  "email": "example@example.com",
+  "password": "examplepassword"
+}
+
+# Успешный ответ
+Status: 200 OK
+Content-Type: application/json
+ResponseBody: {
+  "token": "exampletoken",
+  "user": {
+    "email": "example@example.com",
+    "subscription": "starter"
+  }
+}
+
+# Неуспешный ответ
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+
+Status: 401 Unauthorized
+ResponseBody: {
+  "message": "Email or password is wrong"
+}
+
+```
 
 #### GET /users/logout - Разлогинить пользователя.
 
+##### Parameters:
+
+Authorization - Токен выданный текущему пользователю.
+
+```shell
+
+# Успешный ответ
+Status: 204 No Content
+
+# Неуспешный ответ
+Status: 401 Unauthorized
+Content-Type: application/json
+ResponseBody: {
+  "message": "Not authorized"
+}
+
+```
+
 #### GET /users/current - Получить данные пользователя.
+
+##### Parameters:
+
+Authorization - Токен выданный текущему пользователю.
+
+```shell
+
+# Успешный ответ
+Status: 200 OK
+Content-Type: application/json
+ResponseBody: {
+  "email": "example@example.com",
+  "subscription": "starter"
+}
+
+# Неуспешный ответ
+Status: 401 Unauthorized
+Content-Type: application/json
+ResponseBody: {
+  "message": "Not authorized"
+}
+
+```
 
 #### PATCH /users/avatars - Изменить аватар пользователя.
 
+##### Parameters:
+
+Authorization - Токен выданный текущему пользователю.
+
+```shell
+
+Content-Type: application/json
+RequestBody: {
+  "avatarURL": загруженный файл
+}
+
+# Успешный ответ
+Status: 200 OK
+Content-Type: application/json
+ResponseBody: {
+  "avatarURL": "тут будет ссылка на изображение"
+}
+
+# Неуспешный ответ
+Status: 401 Unauthorized
+Content-Type: application/json
+ResponseBody: {
+  "message": "Not authorized"
+}
+
+```
+
 #### GET /auth/verify/{verificationToken} - Верификация пользователя по email.
 
+##### Parameters:
+
+verificationToken - Токен верификации отправленный на почту.
+
+```shell
+
+Content-Type: application/json
+RequestBody: {
+  "avatarURL": загруженный файл
+}
+
+# Успешный ответ
+Status: 200 OK
+ResponseBody: {
+  message: 'Verification successful',
+}
+
+# Неуспешный ответ
+Status: 404 Not Found
+ResponseBody: {
+  message: 'User not found'
+}
+
+```
+
 #### POST /users/verify/ - Повторная отправка верификации на почту.
+
+```shell
+
+Content-Type: application/json
+RequestBody: {
+  "email": "example@example.com"
+}
+
+# Успешный ответ
+Status: 200 Ok
+Content-Type: application/json
+ResponseBody: {
+  "message": "Verification email sent"
+}
+
+# Неуспешный ответ
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: {
+  message: "Verification has already been passed"
+}
+
+```
 
 ### Команды:
 
