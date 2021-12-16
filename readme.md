@@ -1,30 +1,34 @@
-## GoIT Node.js Course Template Homework
+## GoIT Node.js
 
-GET /api/contacts
+Контакт:
 
-GET /api/contacts/:id
+GET /api/contacts - Получить информацию о всех контактах пользователя.
 
-POST /api/contacts
+GET /api/contacts/{id} - Получить информацию о контакте пользователя.
 
-DELETE /api/contacts/:id
+POST /api/contacts - Создать новый контакт пользователя.
 
-PUT /api/contacts/:id
+DELETE /api/contacts/{id} - Удалить контакт пользователя.
 
-PATCH /api/contacts/:contactId/favorite
+PUT /api/contacts/{id} - Обновить контакт пользователя.
 
-POST /users/signup
+PATCH /api/contacts/{contactId}/favorite - Обновить статус favorite контакту пользователя.
 
-POST /users/login
+Пользователь:
 
-GET /users/logout
+POST /users/signup - Зарегестрировать пользователя.
 
-GET /users/current
+POST /users/login - Залогинить пользователя.
 
-PATCH /users/avatars
+GET /users/logout - Разлогинить пользователя.
 
-GET /auth/verify/:verificationToken
+GET /users/current - Получить данные пользователя.
 
-POST /users/verify/
+PATCH /users/avatars - Изменить аватар пользователя.
+
+GET /auth/verify/{verificationToken} - Верификация пользователя по email.
+
+POST /users/verify/ - Повторная отправка верификации на почту.
 
 ### Команды:
 
