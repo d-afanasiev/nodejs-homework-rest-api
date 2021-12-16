@@ -2,9 +2,47 @@
 
 ### Контакт:
 
-GET /api/contacts - Получить информацию о всех контактах пользователя.
+#### GET /api/contacts - Получить информацию о всех контактах пользователя.
+
+##### Parameters:
+
+Authorization - Токен выданный текущему пользователю.
+
+```shell
+
+# Успешный ответ
+Status: 200 OK
+Content-Type: application/json
+ResponseBody: {
+  Возвращает массив всех контактов
+}
+
+```
 
 GET /api/contacts/{id} - Получить информацию о контакте пользователя.
+
+##### Parameters:
+
+Authorization - Токен выданный текущему пользователю.
+id - идентификатор контакта пользователя.
+
+```shell
+
+# Успешный ответ
+Status: 200 OK
+Content-Type: application/json
+ResponseBody: {
+  Возвращает массив всех контактов
+}
+
+# Неуспешный ответ
+Status: 404 NotFound
+Content-Type: application/json
+ResponseBody: {
+  "message": "Not found"
+}
+
+```
 
 POST /api/contacts - Создать новый контакт пользователя.
 
