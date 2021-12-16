@@ -16,7 +16,7 @@ PATCH /api/contacts/{contactId}/favorite - Обновить статус favorit
 
 ### Пользователь:
 
-POST /users/signup - Зарегестрировать пользователя.
+POST /users/signup - Зарегистрировать пользователя.
 
 POST /users/login - Залогинить пользователя.
 
