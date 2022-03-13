@@ -1,41 +1,41 @@
-## GoIT Node.js
+## CONTACTS
 
-### Контакт:
+### Contact:
 
-#### GET /api/contacts - Получить информацию о всех контактах пользователя.
+#### GET /api/contacts - Get information about all contacts of a user.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.
+Authorization - Token issued to the current user.
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
-  Возвращает массив всех контактов
+  Returns an array of all contacts
 }
 
 ```
 
-#### GET /api/contacts/{id} - Получить информацию о контакте пользователя.
+#### GET /api/contacts/{id} - Get user contact information.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.<br/>
-id - идентификатор контакта пользователя.
+Authorization - Token issued to the current user.<br/>
+id - user contact id.
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
-  Возвращает массив всех контактов
+  Returns an array of all contacts
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 404 NotFound
 Content-Type: application/json
 ResponseBody: {
@@ -44,11 +44,11 @@ ResponseBody: {
 
 ```
 
-#### POST /api/contacts - Создать новый контакт пользователя.
+#### POST /api/contacts - Create a new user contact.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.<br/>
+Authorization - Token issued to the current user.<br/>
 
 ```shell
 
@@ -63,14 +63,14 @@ RequestBody: {
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 201 Created
 Content-Type: application/json
 ResponseBody: {
-  Возвращает массив всех контактов
+  Returns an array of all contacts
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 404 NotFound
 Content-Type: application/json
 ResponseBody: {
@@ -79,23 +79,23 @@ ResponseBody: {
 
 ```
 
-#### DELETE /api/contacts/{id} - Удалить контакт пользователя.
+#### DELETE /api/contacts/{id} - Delete user contact.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.<br/>
-id - идентификатор контакта пользователя.
+Authorization - Token issued to the current user.<br/>
+id - user contact id.
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
   "message": "contact deleted"
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 404 NotFound
 Content-Type: application/json
 ResponseBody: {
@@ -104,12 +104,12 @@ ResponseBody: {
 
 ```
 
-#### PUT /api/contacts/{id} - Обновить контакт пользователя.
+#### PUT /api/contacts/{id} - Update user contact.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.<br/>
-id - идентификатор контакта пользователя.
+Authorization - Token issued to the current user.<br/>
+id - user contact id.
 
 ```shell
 
@@ -124,14 +124,14 @@ RequestBody: {
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
-  Обновленный объект контакта
+  Updated contact object
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 400 BadRequest
 Content-Type: application/json
 ResponseBody: {
@@ -146,12 +146,12 @@ ResponseBody: {
 
 ```
 
-#### PATCH /api/contacts/{contactId}/favorite - Обновить статус favorite контакту пользователя.
+#### PATCH /api/contacts/{contactId}/favorite - Update the favorite status of a user's contact.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.<br/>
-id - идентификатор контакта пользователя.
+Authorization - Token issued to the current user.<br/>
+id - user contact id.
 
 ```shell
 
@@ -164,14 +164,14 @@ RequestBody: {
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
   "contact deleted"
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 400 BadRequest
 Content-Type: application/json
 ResponseBody: {
@@ -186,9 +186,9 @@ ResponseBody: {
 
 ```
 
-### Пользователь:
+### User:
 
-#### POST /users/signup - Зарегистрировать пользователя.
+#### POST /users/signup - Register user.
 
 ```shell
 
@@ -202,7 +202,7 @@ RequestBody: {
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 201 Created
 Content-Type: application/json
 ResponseBody: {
@@ -212,10 +212,10 @@ ResponseBody: {
   }
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+ResponseBody: <Error from Joi or another validation library>
 
 Status: 409 Conflict
 Content-Type: application/json
@@ -225,7 +225,7 @@ ResponseBody: {
 
 ```
 
-#### POST /users/login - Залогинить пользователя.
+#### POST /users/login - Login user.
 
 ```shell
 
@@ -239,7 +239,7 @@ RequestBody: {
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
@@ -250,10 +250,10 @@ ResponseBody: {
   }
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+ResponseBody: <Error from Joi or another validation library>
 
 Status: 401 Unauthorized
 ResponseBody: {
@@ -262,18 +262,18 @@ ResponseBody: {
 
 ```
 
-#### GET /users/logout - Разлогинить пользователя.
+#### GET /users/logout - Log out user.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.
+Authorization - Token issued to the current user.
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 204 No Content
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 401 Unauthorized
 Content-Type: application/json
 ResponseBody: {
@@ -282,15 +282,15 @@ ResponseBody: {
 
 ```
 
-#### GET /users/current - Получить данные пользователя.
+#### GET /users/current - Get user data.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.
+Authorization - Token issued to the current user.
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
@@ -298,7 +298,7 @@ ResponseBody: {
   "subscription": "starter"
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 401 Unauthorized
 Content-Type: application/json
 ResponseBody: {
@@ -307,31 +307,31 @@ ResponseBody: {
 
 ```
 
-#### PATCH /users/avatars - Изменить аватар пользователя.
+#### PATCH /users/avatars - Change user avatar.
 
 ##### Parameters:
 
-Authorization - Токен выданный текущему пользователю.
+Authorization - Token issued to the current user.
 
 ```shell
 
 Content-Type: application/json
 RequestBody: {
-  "avatarURL": загруженный файл
+  "avatarURL": uploaded file
 }
 
 ```
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
-  "avatarURL": "тут будет ссылка на изображение"
+  "avatarURL": "here is a link to the image"
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 401 Unauthorized
 Content-Type: application/json
 ResponseBody: {
@@ -340,30 +340,30 @@ ResponseBody: {
 
 ```
 
-#### GET /auth/verify/{verificationToken} - Верификация пользователя по email.
+#### GET /auth/verify/{verificationToken} - User verification by email.
 
 ##### Parameters:
 
-verificationToken - Токен верификации отправленный на почту.
+verificationToken - Verification token sent by email.
 
 ```shell
 
 Content-Type: application/json
 RequestBody: {
-  "avatarURL": загруженный файл
+  "avatarURL": uploaded file
 }
 
 ```
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 ResponseBody: {
   message: 'Verification successful',
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 404 Not Found
 ResponseBody: {
   message: 'User not found'
@@ -371,7 +371,7 @@ ResponseBody: {
 
 ```
 
-#### POST /users/verify/ - Повторная отправка верификации на почту.
+#### POST /users/verify/ - Resending verification email.
 
 ```shell
 
@@ -384,17 +384,17 @@ RequestBody: {
 
 ```shell
 
-# Успешный ответ
+# Successful response
 Status: 200 Ok
 Content-Type: application/json
 ResponseBody: {
   "message": "Verification email sent"
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+ResponseBody: <Error from Joi or another validation library>
 
 Status: 400 Bad Request
 Content-Type: application/json
@@ -404,9 +404,9 @@ ResponseBody: {
 
 ```
 
-### Команды:
+### Command:
 
-- `npm start` &mdash; старт сервера в режиме production
-- `npm run start:dev` &mdash; старт сервера в режиме разработки (development)
-- `npm run lint` &mdash; запустить выполнение проверки кода с eslint, необходимо выполнять перед каждым PR и исправлять все ошибки линтера
-- `npm lint:fix` &mdash; та же проверка линтера, но с автоматическими исправлениями простых ошибок
+- `npm start` &mdash; server start in mode production
+- `npm run start:dev` &mdash; start server in development mode (development)
+- `npm run lint` &mdash; run code review with eslint, must be done before each PR and fix all linter errors
+- `npm lint:fix` &mdash; the same linter check, but with automatic fixes for simple errors
